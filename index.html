@@ -3,7 +3,7 @@
   <head>
     <title>FileReader Example</title>
 
-    <script type="text/javascript" charset="utf-8" src="phonegap.0.9.5.1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="script/phonegap.0.9.5.1.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     // Wait for PhoneGap to load
@@ -15,10 +15,26 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+        //window.resolveLocalFileSystemURI("file:///readme.txt", onResolveSuccess, fail);
+        
+        try
+        {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+            console.log("ready requestFileSystem");
+            }
+        catch(e){
+            alert("error requestFileSystem");
+        }
+    navigator.notification.alert(
+           'You are the winner!',  // message
+           'Game Over',            // title
+           'Done'                  // buttonName
+    );
     }
+    
 
     function gotFS(fileSystem) {
+        debugger;
         fileSystem.root.getFile("readme.txt", null, gotFileEntry, fail);
     }
 
